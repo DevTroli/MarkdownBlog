@@ -1,0 +1,35 @@
+{% extends 'base.html' %} {% block title %} {{ post.title }} - DJANGO BLOG {% endblock title %}
+{% load static %} {% load markdownify %} 
+{% block content %} {% include "includes/nav.html" %}
+<div class="p-4">
+    <article class="bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+        <div class="lg:w-full lg:h-[720px] w-fit h-fit overflow-hidden rounded-t-lg flex justify-center items-center bg-gray-300 dark:bg-gray-700">
+            <img 
+                src="{{ post.cover }}" 
+                alt="{{ post.title }}" 
+                class="lg:max-w-full lg:max-h-full object-contain w-full h-full " 
+            />
+        </div>
+        <div class="p-5">
+            <h2 class="text-2xl font-bold text-slate-950 dark:text-white mb-2">
+                {{ post.title }}
+            </h2>
+            <div class="flex gap-x-4 justify-between">
+                <p class="text-slate-950 dark:text-gray-300 mb-4">Escrito por: {{ post.author }}</p>
+                <p class="text-slate-950 dark:text-gray-300 mb-4">{{ post.date }}</p>
+            </div>
+            <div class="flex flex-wrap gap-2 mb-4">
+                {% for tag in post.tags.all %}
+                <span class="bg-gray-700 dark:bg-green-600 text-white dark:text-gray-100 px-3 py-1 rounded-full text-sm">
+                    {{ tag.name }}
+                </span>
+                {% endfor %}
+            </div>
+            <div class="text-slate-950 dark:text-gray-50">
+                {{ post.content|markdownify }}
+            </div>
+        </div>
+    </article>
+</div>
+
+{% endblock %}

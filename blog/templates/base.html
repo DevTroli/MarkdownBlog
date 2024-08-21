@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <link
+            rel="shortcut icon"
+            href="https://raw.githubusercontent.com/DevTroli/servidor_estaticos/main/icon.svg"
+        />
+        <title>{% block title %}Django Blog{% endblock title %}</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                darkMode: "class",
+                content: [
+                    "./blog/templates/**/*.html",
+                    "./blog/static/**/*.css",
+                    "./setup/templates/**/*.html",
+                ],
+                theme: {
+                    extend: {},
+                },
+                plugins: [],
+            };
+        </script>
+        {% load static %}
+        <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+    </head>
+    <style>
+        body {
+            transition:
+                background-color 0.15s,
+                color 0.15s;
+        }
+    </style>
+    <body
+        class="bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300"
+    >
+        {% block content %} {% endblock content %}
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Verifique se o botão de alternância de tema está presente antes de adicionar o evento
+                const themeToggleBtn = document.getElementById("theme-toggle");
+                if (themeToggleBtn) {
+                    const darkIcon = document.getElementById(
+                        "theme-toggle-dark-icon",
+                    );
+                    const lightIcon = document.getElementById(
+                        "theme-toggle-light-icon",
+                    );
+
+                    if (
+                        localStorage.getItem("color-theme") === "dark" ||
+                        (!("color-theme" in localStorage) &&
+                            window.matchMedia("(prefers-color-scheme: dark)")
+                                .matches)
+                    ) {
+                        document.documentElement.classList.add("dark");
+                        darkIcon.classList.remove("hidden");
+                        lightIcon.classList.add("hidden");
+                    } else {
+                        document.documentElement.classList.remove("dark");
+                        lightIcon.classList.remove("hidden");
+                        darkIcon.classList.add("hidden");
+                    }
+
+                    themeToggleBtn.addEventListener("click", function () {
+                        if (
+                            document.documentElement.classList.contains("dark")
+                        ) {
+                            document.documentElement.classList.remove("dark");
+                            localStorage.setItem("color-theme", "light");
+                            darkIcon.classList.add("hidden");
+                            lightIcon.classList.remove("hidden");
+                        } else {
+                            document.documentElement.classList.add("dark");
+                            localStorage.setItem("color-theme", "dark");
+                            lightIcon.classList.add("hidden");
+                            darkIcon.classList.remove("hidden");
+                        }
+                    });
+                }
+
+                // Verifique se o botão de alternância de navbar está presente antes de adicionar o evento
+                const navbarToggle = document.getElementById("navbar-toggle");
+                const navbarMenu = document.getElementById("navbar-menu");
+                if (navbarToggle && navbarMenu) {
+                    navbarToggle.addEventListener("click", function () {
+                        navbarMenu.classList.toggle("hidden");
+                    });
+                }
+            });
+        </script>
+    </body>
+</html>
