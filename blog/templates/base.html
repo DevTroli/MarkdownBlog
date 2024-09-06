@@ -1,3 +1,5 @@
+{% load static %}
+
 <!doctype html>
 <html lang="pt-br">
     <head>
@@ -11,13 +13,14 @@
             href="https://raw.githubusercontent.com/DevTroli/servidor_estaticos/main/icon.svg"
         />
         <title>{% block title %}Django Blog{% endblock title %}</title>
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}" />       
         <script src="https://cdn.tailwindcss.com"></script>
         <script>
             tailwind.config = {
                 darkMode: "class",
                 content: [
                     "./blog/templates/**/*.html",
-                    "./blog/static/**/*.css",
+                    "./blog/static/css/*.css",
                     "./setup/templates/**/*.html",
                 ],
                 theme: {
@@ -26,20 +29,155 @@
                 plugins: [],
             };
         </script>
-        {% load static %}
-        <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+        <style>   
+        /* Estilo geral para o bloco de código */
+        pre {
+            background-color: #000000; /* Fundo preto para simular terminal */
+            color: #00ff00; /* Texto verde brilhante */
+            border: 1px solid #00ff00; /* Borda verde neon */
+            border-radius: 5px; /* Cantos arredondados */
+            padding: 16px; /* Espaçamento interno */
+            overflow-x: auto; /* Permite rolagem horizontal se o conteúdo for largo */
+            font-family: 'Source Code Pro', monospace; /* Fonte de código estilo terminal */
+            box-shadow: 0px 0px 10px rgba(0, 255, 0, 0.5); /* Sombra suave esverdeada */
+        }
+                
+        /* Estilo específico para o texto de código dentro de pre */
+        code {
+            background-color: transparent; /* Fundo transparente para texto de código */
+            border-radius: 3px; /* Cantos arredondados */
+            padding: 2px 4px; /* Espaçamento interno */
+            font-size: 1em; /* Tamanho da fonte */
+            color: #00ff00; /* Cor do texto verde brilhante */
+        }
+                
+        /* Estilo para texto selecionado */
+        ::selection {
+            background-color: #004400; /* Fundo verde escuro para seleção */
+            color: #00ff00; /* Texto verde brilhante ao selecionar */
+        }
+        
+        .markdown-content h1{
+            margin: 0px;
+            font-size: 2rem; /* Tamanho grande para destaque */
+            font-weight: bold; /* Negrito para chamar atenção */
+            text-align: start; /* Centralizado para foco visual */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Leve sombra para destaque */
+        /* Estilo responsivo */
+            @media (max-width: 768px) {
+                font-size: 1.25rem; /* Ajusta o tamanho para dispositivos menores */
+            }        
+            @media (max-width: 480px) {
+                font-size: 1.25rem; /* Ajusta ainda mais para smartphones */
+            }
+        }
+        
+        .markdown-content h2 {
+            margin: 0px;
+            font-size: 1.75rem; /* Menor que H1, mas ainda bem destacado */
+            font-weight: bold;
+            text-align: start; 
+            padding-bottom: 0.25rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Sombra leve */        
+            @media (max-width: 768px) {
+                font-size: 1.5rem;
+        }        
+            @media (max-width: 480px) {
+                font-size: 1.25rem;
+            }
+        }
+                
+        .markdown-content h3 {
+            margin: 0px;
+            font-size: 1.5rem; /* Um pouco menor que H2 */
+            font-weight: bold;
+            text-align: start; 
+            padding-bottom: 0.2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.08); /* Sombra sutil */        
+            @media (max-width: 768px) {
+                font-size: 1.3rem;
+            }    
+            @media (max-width: 480px) {
+                font-size: 1.1rem;
+            }
+        }
+                
+        .markdown-content h4 {
+            font-size: 1.25rem; /* Menor ainda, mas bem visível */
+            font-weight: 600;
+            text-align: start; 
+            margin: 0rem;        
+            @media (max-width: 768px) {
+                font-size: 1.1rem;
+            }    
+            @media (max-width: 480px) {
+                font-size: 1rem;
+            }
+        }        
+        /* Estilo para links */
+        .markdown-content a {
+            color: #2980b9; /* Azul para destacar links */
+            text-decoration: none; /* Remove o sublinhado */
+        }
+                
+        .markdown-content a:hover {
+            text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
+        }        
+        /* Estilo para imagens */
+        .markdown-content img {
+            max-width: 100%; /* Responsividade */
+            height: auto;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 8px; /* Bordas arredondadas */
+        }
+        </style>
+        <!-- Adicionando o EasyMDE -->
+        <script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
         <link
             rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+            href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css"
         />
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var easyMDE = new EasyMDE({
+                    element: document.getElementById("content"),
+                    spellChecker: false,
+                    toolbar: [
+                        "bold",
+                        "italic",
+                        "heading",
+                        "|",
+                        "quote",
+                        "unordered-list",
+                        "ordered-list",
+                        "|",
+                        "link",
+                        "image",
+                        "table",
+                        "horizontal-rule",
+                        "|",
+                        "code",
+                        "preview",
+                        "guide",
+                        "|",
+                    ],
+                    renderingConfig: {
+                        singleLineBreaks: true,
+                        codeSyntaxHighlighting: true,
+                    },
+                });
+
+                document
+                    .querySelector("form")
+                    .addEventListener("submit", function (event) {
+                        document.getElementById("content").value =
+                            easyMDE.value();
+                    });
+            });
+        </script>
     </head>
-    <style>
-        body {
-            transition:
-                background-color 0.15s,
-                color 0.15s;
-        }
-    </style>
     <body
         class="bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300"
     >
@@ -47,7 +185,6 @@
 
         <script>
             document.addEventListener("DOMContentLoaded", function () {
-                // Verifique se o botão de alternância de tema está presente antes de adicionar o evento
                 const themeToggleBtn = document.getElementById("theme-toggle");
                 if (themeToggleBtn) {
                     const darkIcon = document.getElementById(
@@ -89,7 +226,6 @@
                     });
                 }
 
-                // Verifique se o botão de alternância de navbar está presente antes de adicionar o evento
                 const navbarToggle = document.getElementById("navbar-toggle");
                 const navbarMenu = document.getElementById("navbar-menu");
                 if (navbarToggle && navbarMenu) {

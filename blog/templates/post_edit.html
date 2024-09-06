@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}Editar Post - DJANGO BLOG{% endblock title %}
+{% load static %}
+
+{% block content %}
+{% include "includes/nav.html" %}
+
+<div class="p-6">
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-4">
+            <label for="title" class="block text-gray-700 dark:text-gray-200">Título:</label>
+            <input
+                type="text"
+                id="title"
+                name="title"
+                class="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-lg dark:bg-gray-800 dark:text-gray-100"
+                value="{% if post %}{{ post.title }}{% endif %}"
+                required
+            />
+        </div>
+        <div class="mb-4">
+            <label for="tags" class="block text-gray-700 dark:text-gray-200">Tags:</label>
+            <select
+                id="tags"
+                name="tags"
+                multiple
+                class="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-lg dark:bg-gray-800 dark:text-gray-100"
+            >
+                {% for tag in tags %}
+                    <option value="{{ tag.id }}" {% if tag in post.tags.all %}selected{% endif %}>{{ tag.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-4">
+            <label for="content" class="block text-gray-700 dark:text-gray-200">Conteúdo:</label>
+            <textarea
+                id="content"
+                name="content"
+                class="w-full h-64 p-2 border border-gray-300 dark:border-gray-700 rounded-lg dark:bg-gray-800 dark:text-gray-100"
+                required
+                style="display:none;"
+            >{% if post %}{{ post.content }}{% endif %}</textarea>
+        </div>
+        <button
+            type="submit"
+            class="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
+        >
+            Salvar
+        </button>
+    </form>
+</div>
+
+{% endblock %}

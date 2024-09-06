@@ -1,5 +1,8 @@
-{% extends 'base.html' %} {% load static %} {% block title %}POSTS - DJANGO
-BLOG{% endblock title %} {% block content %} {% include "includes/nav.html" %}
+{% extends 'base.html' %} 
+{% load static %} 
+{% block title %}POSTS - DJANGO BLOG{% endblock title %} 
+{% block content %} 
+{% include "includes/nav.html" %}
 
 <div class="my-4 p-6 justify-between items-center">
     <form
@@ -87,6 +90,10 @@ BLOG{% endblock title %} {% block content %} {% include "includes/nav.html" %}
             </a>
         </div>
     </article>
+    
+    {% empty %}
+    
+    <h1> Sem posts sobre isso no momento...</h1>
     {% endfor %}
 </div>
 {% endblock %}

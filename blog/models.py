@@ -7,7 +7,8 @@ class Tag(models.Model):
     slug = models.SlugField(max_length=100, unique=True)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
+        if not self.slug:
+            self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -24,7 +25,8 @@ class Post(models.Model):
     author = models.ForeignKey("auth.User", on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
+        if not self.slug:
+            self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
     def __str__(self):
