@@ -10,7 +10,7 @@ chars = "abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)"
 CONFIG_STRING = """
 DEBUG=True
 SECRET_KEY=%s
-ALLOWED_HOSTS=127.0.0.1, .localhost
+ALLOWED_HOSTS=127.0.0.1
 
 """.strip() % get_random_string(
     50, chars

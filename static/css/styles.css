@@ -1,3 +1,109 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Estilos gerais */
+body {
+    transition:
+        background-color 0.15s,
+        color 0.15s;
+}        
+/* Estilo geral para o bloco de código */
+pre {
+    background-color: #000000; /* Fundo preto para simular terminal */
+    color: #00ff00; /* Texto verde brilhante */
+    border: 1px solid #00ff00; /* Borda verde neon */
+    border-radius: 5px; /* Cantos arredondados */
+    padding: 16px; /* Espaçamento interno */
+    overflow-x: auto; /* Permite rolagem horizontal se o conteúdo for largo */
+    font-family: 'Source Code Pro', monospace; /* Fonte de código estilo terminal */
+    box-shadow: 0px 0px 10px rgba(0, 255, 0, 0.5); /* Sombra suave esverdeada */
+}
+        
+/* Estilo específico para o texto de código dentro de pre */
+code {
+    background-color: transparent; /* Fundo transparente para texto de código */
+    border-radius: 3px; /* Cantos arredondados */
+    padding: 2px 4px; /* Espaçamento interno */
+    font-size: 1em; /* Tamanho da fonte */
+    color: #00ff00; /* Cor do texto verde brilhante */
+}
+        
+/* Estilo para texto selecionado */
+::selection {
+    background-color: #004400; /* Fundo verde escuro para seleção */
+    color: #00ff00; /* Texto verde brilhante ao selecionar */
+}
+
+.markdown-content h1{
+    font-size: 2rem; /* Tamanho grande para destaque */
+    font-weight: bold; /* Negrito para chamar atenção */
+    text-align: start; /* Centralizado para foco visual */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Leve sombra para destaque */
+/* Estilo responsivo */
+    @media (max-width: 768px) {
+        font-size: 1.25rem; /* Ajusta o tamanho para dispositivos menores */
+    }        
+    @media (max-width: 480px) {
+        font-size: 1.25rem; /* Ajusta ainda mais para smartphones */
+    }
+}
+
+.markdown-content h2 {
+    font-size: 1.75rem; /* Menor que H1, mas ainda bem destacado */
+    font-weight: bold;
+    text-align: start; 
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ddd; /* Linha inferior para separação */
+    padding-bottom: 0.25rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Sombra leve */        
+    @media (max-width: 768px) {
+        font-size: 1.5rem;
+}        
+    @media (max-width: 480px) {
+        font-size: 1.25rem;
+    }
+}
+        
+.markdown-content h3 {
+    font-size: 1.5rem; /* Um pouco menor que H2 */
+    font-weight: bold;
+    text-align: start; 
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 0.5px solid #ccc;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.08); /* Sombra sutil */        
+    @media (max-width: 768px) {
+        font-size: 1.3rem;
+    }    
+    @media (max-width: 480px) {
+        font-size: 1.1rem;
+    }
+}
+        
+.markdown-content h4 {
+    font-size: 1.25rem; /* Menor ainda, mas bem visível */
+    font-weight: 600;
+    text-align: start; 
+    margin-bottom: 0.6rem;        
+    @media (max-width: 768px) {
+        font-size: 1.1rem;
+    }    
+    @media (max-width: 480px) {
+        font-size: 1rem;
+    }
+}        
+/* Estilo para links */
+.markdown-content a {
+    color: #2980b9; /* Azul para destacar links */
+    text-decoration: none; /* Remove o sublinhado */
+}
+        
+.markdown-content a:hover {
+    text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
+}        
+/* Estilo para imagens */
+.markdown-content img {
+    max-width: 100%; /* Responsividade */
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 8px; /* Bordas arredondadas */
+}
